@@ -4,7 +4,7 @@ import importlib
 
 from aoc.tools.console import console
 
-LOGFILE = "run.html"
+LOGFILE = "run.txt"
 parser = argparse.ArgumentParser(description="Run a day of aoc")
 parser.add_argument("day", help="day of the aoc solution to run")
 parser.add_argument("part", help="part of the aoc solution to run")
@@ -39,7 +39,7 @@ def main():
 
     try:
         console.log(f"imported module, running main function")
-        LOGFILE = f"day-{args.day}{args.part}.html"
+        LOGFILE = f"day-{args.day}{args.part}.txt"
         return module.main()
     except Exception as e:
         console.log(f"main function errored out", style="red")
@@ -50,5 +50,5 @@ def main():
 if __name__ == "__main__":
     exitcode = main()
     console.log(f"saving logs to logs/{LOGFILE}")
-    console.save_html(f"logs/{LOGFILE}")
+    console.save_text(f"logs/{LOGFILE}")
     sys.exit(exitcode)
