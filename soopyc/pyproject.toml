@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "aoc2021"
+version = "0.0.0"
+description = "aoc 2021 solutions"
+authors = ["Sophie <me@soopy.moe>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.26.0"
+python-dotenv = "^0.19.2"
+rich = "^10.15.1"
+black = "^21.11b1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py39']

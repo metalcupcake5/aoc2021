@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<style>
+.r1 {color: #7fbfbf; text-decoration-color: #7fbfbf}
+.r2 {color: #7f7f7f; text-decoration-color: #7f7f7f}
+.r3 {color: #ff0000; text-decoration-color: #ff0000}
+.r4 {color: #800000; text-decoration-color: #800000; font-weight: bold}
+.r5 {color: #bf7f7f; text-decoration-color: #bf7f7f; font-weight: bold}
+.r6 {color: #bfbf7f; text-decoration-color: #bfbf7f}
+.r7 {color: #808000; text-decoration-color: #808000; font-weight: bold}
+.r8 {color: #0000ff; text-decoration-color: #0000ff}
+.r9 {color: #00ff00; text-decoration-color: #00ff00}
+.r10 {color: #808000; text-decoration-color: #808000}
+.r11 {color: #800000; text-decoration-color: #800000}
+.r12 {color: #00ffff; text-decoration-color: #00ffff}
+.r13 {color: #ff0000; text-decoration-color: #ff0000; font-weight: bold}
+body {
+    color: #000000;
+    background-color: #ffffff;
+}
+</style>
+</head>
+<html>
+<body>
+    <code>
+        <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span class="r1">[22:29:07] </span>attempting to import aoc.day1.a                                                                                                                                        <a class="r2" href="file:///home/sophie/PycharmProjects/aoc2021/soopyc/run.py">run.py</a><span class="r2">:</span><a class="r2" href="file:///home/sophie/PycharmProjects/aoc2021/soopyc/run.py#31">31</a>
+<span class="r1">           </span>imported module, running main function                                                                                                                                 <a class="r2" href="file:///home/sophie/PycharmProjects/aoc2021/soopyc/run.py">run.py</a><span class="r2">:</span><a class="r2" href="file:///home/sophie/PycharmProjects/aoc2021/soopyc/run.py#39">39</a>
+<span class="r1">           </span>main function errored out                                                                                                                                              <a class="r2" href="file:///home/sophie/PycharmProjects/aoc2021/soopyc/run.py">run.py</a><span class="r2">:</span><a class="r2" href="file:///home/sophie/PycharmProjects/aoc2021/soopyc/run.py#43">43</a>
+<span class="r3">╭─────────────────────────────── </span><span class="r4">Traceback </span><span class="r5">(most recent call last)</span><span class="r3"> ────────────────────────────────╮</span>
+<span class="r3">│</span>                                                                                                  <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">/home/sophie/PycharmProjects/aoc2021/soopyc/</span><span class="r7">run.py</span>:<span class="r8">41</span> in <span class="r9">main</span>                                    <span class="r3">│</span>
+<span class="r3">│</span>                                                                                                  <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r2">38 │   </span><span class="r8">try</span>:                                                                                    <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r2">39 │   │   </span>console.log(<span class="r10">f&#x27;imported module, running main function&#x27;</span>)                              <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r2">40 │   │   </span>LOGFILE = <span class="r10">f&quot;day-{</span>args.day<span class="r10">}{</span>args.part<span class="r10">}.html&quot;</span>                                         <span class="r3">│</span>
+<span class="r3">│</span> <span class="r11">❱ </span>41 <span class="r2">│   │   </span><span class="r8">return</span> module.main()                                                                <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r2">42 │   </span><span class="r8">except</span> <span class="r12">Exception</span> <span class="r8">as</span> e:                                                                  <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r2">43 │   │   </span>console.log(<span class="r10">f&#x27;main function errored out&#x27;</span>)                                           <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r2">44 │   │   </span>console.print_exception()                                                           <span class="r3">│</span>
+<span class="r3">│</span> <span class="r6">/home/sophie/PycharmProjects/aoc2021/soopyc/aoc/day1/</span><span class="r7">a.py</span>:<span class="r8">5</span> in <span class="r9">main</span>                              <span class="r3">│</span>
+<span class="r3">│</span>                                                                                                  <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r2">2 </span>                                                                                             <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r2">3 </span>                                                                                             <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r2">4 </span><span class="r8">def</span> <span class="r9">main</span>():                                                                                  <span class="r3">│</span>
+<span class="r3">│</span> <span class="r11">❱ </span>5 <span class="r2">│   </span><span class="r8">raise</span> <span class="r12">Exception</span>(<span class="r10">&#x27;cock&#x27;</span>)                                                                  <span class="r3">│</span>
+<span class="r3">│</span>   <span class="r2">6 </span>                                                                                             <span class="r3">│</span>
+<span class="r3">╰──────────────────────────────────────────────────────────────────────────────────────────────────╯</span>
+<span class="r13">Exception: </span>cock
+<span class="r1">[22:29:08] </span>saving logs to logs/day-1a.html                                                                                                                                        <a class="r2" href="file:///home/sophie/PycharmProjects/aoc2021/soopyc/run.py">run.py</a><span class="r2">:</span><a class="r2" href="file:///home/sophie/PycharmProjects/aoc2021/soopyc/run.py#51">51</a>
+</pre>
+    </code>
+</body>
+</html>
