@@ -70,10 +70,8 @@ def main():
         console.log(f"Unable to fetch data: {e}", style="yellow")
         console.log(f"HTTP response code: [red]{res.status_code}[/red]", style="yellow")
         return 1
-
-    result = res.text
     console.log(
-        f"got {len(res.content)} bytes of content, totalling {len(result.splitlines())} lines"
+        f"got {len(res.content)} bytes of content, totalling {len(res.text.splitlines())} lines"
     )
     console.log(
         f"perf: time elapsed waiting for request result {res.elapsed}", style="blue"
@@ -81,8 +79,8 @@ def main():
 
     initialize_day(day)
 
-    with open(f"./aoc/day{day}/input", "w+") as f:
-        f.write(result)
+    with open(f"./aoc/day{day}/input.py", "w+") as f:
+        f.write(f"_string = {res.content}")
         console.log(f"wrote input to `./aoc/day{day}/input`")
 
 
