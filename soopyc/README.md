@@ -12,6 +12,8 @@ activate the venv (if it made one) and then run the script like how you normally
 - [Tools](.)
   - [Input fetcher](./fetch-input.py)
     - Begin time: 1638356357.830592
+    - Comp. Time: 1638369151.731563
+    -   Duration: 3:33:13.900971 (`datetime.timedelta(seconds=12793, microseconds=900971)`)
 
 - [Day 1](./day1)
 
