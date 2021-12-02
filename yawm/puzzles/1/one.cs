@@ -19,34 +19,67 @@ namespace puzzles
         }
 
         private const string Path = @"C:\Users\yawmd\Documents\GitHub\aoc2021\yawm\puzzles\1\input.txt";
-        private static readonly List<Number> Numbers = new ();
-        private static int _increases;
-        
-        public static void Start()
+
+        private static void A()
         {
+            var increases = 0;
             var inp = File.ReadAllLines(Path);
-            Number previous = null;
+            var prev = int.MaxValue;
 
             foreach (var line in inp)
             {
+                var num = int.Parse(line);
+                if (num > prev)
+                    increases++;
+                
+                prev = num;
+            }
+            
+            Console.WriteLine(increases);
+        }
+
+        private static void B()
+        {
+            var increases = 0;
+            var numbers = GetNumbers();
+            var prev = int.MaxValue;
+            
+            foreach (var num in numbers)
+            {
+                if (num.Previous?.Previous == null) 
+                    continue;
+                
+                var sum = num.Value + num.Previous.Value + num.Previous.Previous.Value;
+                if (sum > prev)
+                    increases++;
+                
+                prev = sum;
+            }
+
+            Console.WriteLine(increases);
+        }
+
+        private static List<Number> GetNumbers()
+        {
+            var inp = File.ReadAllLines(Path);
+            var numbers = new List<Number>();
+            Number previous = null;
+            
+            foreach (var line in inp)
+            {
                 var num = new Number(previous, int.Parse(line));
-                Numbers.Add(num);
+                numbers.Add(num);
 
                 previous = num;
             }
 
-            var prev = int.MaxValue;
-            foreach (var num in Numbers)
-            {
-                if (num.Previous?.Previous == null) continue;
-                
-                var sum = num.Value + num.Previous.Value + num.Previous.Previous.Value;
-                if (sum > prev)
-                    _increases++;
-                prev = sum;
-            }
+            return numbers;
+        }
 
-            Console.WriteLine(_increases);
+        public static void Start()
+        {
+            A();
+            B();
         }
     }
 }
