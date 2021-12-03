@@ -8,6 +8,7 @@ namespace puzzles
         {
             one.Start();
             two.Start();
+            three.Start();
         }
     }
 }
