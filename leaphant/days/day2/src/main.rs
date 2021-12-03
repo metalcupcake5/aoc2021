@@ -9,9 +9,7 @@ fn main() {
     let mut a: u32 = 0;
     let mut result: u32 = 0;
 
-    let mut part: u8 = 1;
-
-    loop {
+    for part in 1..=2 {
         if part == 2 {
             d = 0;
             h = 0;
@@ -52,11 +50,5 @@ fn main() {
         }
 
         println!("Result (part {}): {}", part, result);
-
-        if part > 1 {
-            break;
-        }
-
-        part += 1;
     }
 }
