@@ -13,26 +13,35 @@ int exponent(int x,int exp){
         sum*=x;
     return sum;
 }
-
-std::vector<str> makeVec(){
-    std::vector<str> vec{};
+bvec strToBvec(str curnt){
+    bvec curList{};
+    for (char i:curnt){
+        if (i=='1')
+            curList.push_back(true);
+        else
+            curList.push_back(false);
+    }
+    return curList;
+}
+std::vector<bvec> makeVec(){
+    std::vector<bvec> vec{};
     std::ifstream input;
     input.open("day3.txt");
     str curnt{};
     while(std::getline(input,curnt)){
-        vec.push_back(curnt);
+        vec.push_back(strToBvec(curnt));
     }   
     input.close();
     return vec;
 }
 
-bool find_max(int i,const std::vector<str> &vec){
+bool find_max(int i,const std::vector<bvec> &vec){
     size_t tmp{0};
     size_t half{vec.size()/2};
     if(vec.size()%2==1)
         half++;
-    for (str x:vec){
-        if (x[i]=='1')
+    for (bvec x:vec){
+        if (x[i])
             tmp++;
     }
     if (tmp>=half)
@@ -40,7 +49,7 @@ bool find_max(int i,const std::vector<str> &vec){
     return false;
 }
 
-bvec makeGamma(const std::vector<str> &vec){
+bvec makeGamma(const std::vector<bvec> &vec){
     bvec gamma{};
     for (size_t i{0};i<vec[0].size();i++){
         gamma.push_back(find_max(i,vec));
@@ -70,53 +79,34 @@ int binaryToDec(const bvec &binary){
     return dec;
 }
 
-int strToDec(str binary){
-    bvec bin{};
-    for (char i:binary){
-        if (i=='1')
-            bin.push_back(true);
-        else
-            bin.push_back(false);
-    }
-    return binaryToDec(bin);
-}
-
-void purge(int i,std::vector<str> &vec,char max){
+void purge(int i,std::vector<bvec> &vec,char max){
     for (int x{static_cast<int>(vec.size()-1)};x>=0;x--){
         if (vec[x][i]!= max)
             vec.erase(vec.begin()+x);
     }
 }
 
-int pt2(std::vector<str> vec,bool minmax){
+int pt2(std::vector<bvec> vec,bool minmax){
     int i{0};
     bool max{};
-    char crnt{};
-    char o1;
-    char o2;
-    if (minmax==true){
-        o1='1';
-        o2='0';
-    }  
-    else{
-        o1='0';
-        o2='1';
-    }
+    bool crnt{};
     while (true){
         if (find_max(i, vec)==true)
-            crnt=o1;
+            crnt=true;
         else
-            crnt=o2;
+            crnt=false;
+        if (minmax==false)
+            crnt= !crnt;
         purge(i,vec,crnt);
         if (vec.size()==1)
             break;   
         i++;
     }
-    return strToDec(vec[0]);
+    return binaryToDec(vec[0]);
 }
 
 int main(){
-    std::vector<str> vec{makeVec()};
+    std::vector<bvec> vec{makeVec()};
     bvec gamma{makeGamma(vec)};
     bvec epsilon{epsilonFromGamma(gamma)};
     int dgamma{binaryToDec(gamma)};
