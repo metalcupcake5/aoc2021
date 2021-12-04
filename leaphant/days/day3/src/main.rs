@@ -34,10 +34,9 @@ fn main() {
         }
 
         let mut len: u32 = d.len() as u32;
+        len /= 2;
 
         let exp = (digits.len() as u32 - 1) - i as u32;
-
-        len /= 2;
 
         match sum.cmp(&len) {
             Ordering::Greater => gamma += 2u32.pow(exp),
