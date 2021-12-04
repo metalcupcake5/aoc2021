@@ -8,9 +8,9 @@ namespace puzzles
 
         private static void Main(string[] args)
         {
-            //one.Start(Path);
-            //two.Start(Path);
-            //three.Start(Path);
+            one.Start(Path);
+            two.Start(Path);
+            three.Start(Path);
             four.Start(Path);
         }
     }
