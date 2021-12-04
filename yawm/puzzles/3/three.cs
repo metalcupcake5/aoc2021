@@ -26,33 +26,28 @@ namespace puzzles
                 return Zeros > Ones ? '1' : '0';
             }
         }
-        
-        private const string Path = @"C:\Users\yawmd\Documents\GitHub\aoc2021\yawm\puzzles\3\input.txt";
-        
-        
-        private static void A()
+
+        private static void A(string[] input)
         {
-            var input = File.ReadAllLines(Path).ToList();
             var gamma = ToDecimal(GetExtremes(true, input));
             var epsilon = ToDecimal(GetExtremes(false, input));
 
             Console.WriteLine(gamma * epsilon);
         }
 
-        private static void B()
+        private static void B(string[] input)
         {
-            var input = File.ReadAllLines(Path).ToList();
             var generator = GetCriteriaBit(true, input);
             var scrubber = GetCriteriaBit(false, input);
 
             Console.WriteLine(ToDecimal(generator) * ToDecimal(scrubber));
         }
 
-        private static string GetCriteriaBit(bool highest, List<string> input)
+        private static string GetCriteriaBit(bool highest, string[] input)
         {
             var current = input;
             var i = 0;
-            while (current.Count > 1)
+            while (current.Length > 1)
             {
                 current = GetBitsWithValueAtIndex(i, GetExtreme(highest, i, current), current);
                 i++;
@@ -61,9 +56,9 @@ namespace puzzles
             return current[0];
         }
 
-        private static List<string> GetBitsWithValueAtIndex(int index, char extreme, List<string> input)
+        private static string[] GetBitsWithValueAtIndex(int index, char extreme, string[] input)
         {
-            return input.Where(row => row[index] == extreme).ToList();
+            return input.Where(row => row[index] == extreme).ToArray();
         }
 
         private static int ToDecimal(string binary)
@@ -71,7 +66,7 @@ namespace puzzles
             return Convert.ToInt32(binary, 2);
         }
 
-        private static char GetExtreme(bool highest, int index, List<string> input)
+        private static char GetExtreme(bool highest, int index, string[] input)
         {
             Pair column = null;
             foreach (var row in input)
@@ -96,7 +91,7 @@ namespace puzzles
             return column?.Get(highest) ?? '0';
         }
         
-        private static string GetExtremes(bool highest, List<string> input)
+        private static string GetExtremes(bool highest, string[] input)
         {
             var columns = new List<Pair> ();
             foreach (var row in input)
@@ -126,10 +121,11 @@ namespace puzzles
             return endBit;
         }
         
-        public static void Start()
+        public static void Start(string path)
         {
-            A();
-            B();
+            var input = File.ReadAllLines(path.Replace("${day}", "3"));
+            A(input);
+            B(input);
         }
     }
 }

@@ -8,8 +8,8 @@ namespace puzzles
     {
         private class Number
         {
-            public Number Previous { get; set; }
-            public int Value { get; set; }
+            public Number Previous { get; }
+            public int Value { get; }
 
             public Number(Number prev, int value)
             {
@@ -18,15 +18,12 @@ namespace puzzles
             }
         }
 
-        private const string Path = @"C:\Users\yawmd\Documents\GitHub\aoc2021\yawm\puzzles\1\input.txt";
-
-        private static void A()
+        private static void A(string[] input)
         {
             var increases = 0;
-            var inp = File.ReadAllLines(Path);
             var prev = int.MaxValue;
 
-            foreach (var line in inp)
+            foreach (var line in input)
             {
                 var num = int.Parse(line);
                 if (num > prev)
@@ -38,10 +35,10 @@ namespace puzzles
             Console.WriteLine(increases);
         }
 
-        private static void B()
+        private static void B(string[] input)
         {
             var increases = 0;
-            var numbers = GetNumbers();
+            var numbers = GetNumbers(input);
             var prev = int.MaxValue;
             
             foreach (var num in numbers)
@@ -59,13 +56,12 @@ namespace puzzles
             Console.WriteLine(increases);
         }
 
-        private static List<Number> GetNumbers()
+        private static List<Number> GetNumbers(string[] input)
         {
-            var inp = File.ReadAllLines(Path);
             var numbers = new List<Number>();
             Number previous = null;
             
-            foreach (var line in inp)
+            foreach (var line in input)
             {
                 var num = new Number(previous, int.Parse(line));
                 numbers.Add(num);
@@ -76,10 +72,11 @@ namespace puzzles
             return numbers;
         }
 
-        public static void Start()
+        public static void Start(string path)
         {
-            A();
-            B();
+            var input = File.ReadAllLines(path.Replace("${day}", "1"));
+            A(input);
+            B(input);
         }
     }
 }

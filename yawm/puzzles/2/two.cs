@@ -26,13 +26,10 @@ namespace puzzles
             }
         }
 
-        private const string Path = @"C:\Users\yawmd\Documents\GitHub\aoc2021\yawm\puzzles\2\input.txt";
-
-        private static void A()
+        private static void A(string[] input)
         {
             var target = new Target(0, 0, 0);
-            var inp = File.ReadAllLines(Path);
-            foreach (var line in inp)
+            foreach (var line in input)
             {
                 var values = line.Split(' ');
                 var dir = Enum.Parse<Direction>(values[0], true);
@@ -54,11 +51,10 @@ namespace puzzles
             Console.WriteLine(target.X * target.Y);
         }
         
-        private static void B()
+        private static void B(string[] input)
         {
             var target = new Target(0, 0, 0);
-            var inp = File.ReadAllLines(Path);
-            foreach (var line in inp)
+            foreach (var line in input)
             {
                 var values = line.Split(' ');
                 var dir = Enum.Parse<Direction>(values[0], true);
@@ -81,10 +77,11 @@ namespace puzzles
             Console.WriteLine(target.X * target.Y);
         }
         
-        public static void Start()
+        public static void Start(string path)
         {
-            A();
-            B();
+            var input = File.ReadAllLines(path.Replace("${day}", "2"));
+            A(input);
+            B(input);
         }
     }
 }
