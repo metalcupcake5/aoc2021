@@ -1,4 +1,5 @@
 use std::fs;
+use std::cmp::Ordering;
 
 fn main() {
     let input = fs::read_to_string("../../inputs/2021/3/input.txt")
@@ -20,10 +21,10 @@ fn main() {
         }
     }
 
-    let mut gamma = String::from("");
-    let mut epsilon = String::from("");
+    let mut gamma: u32 = 0;
+    let mut epsilon: u32 = 0;
 
-    for d in digits {
+    for (i, d) in digits.iter().enumerate() {
         let mut sum: u32 = 0;
 
         for x in d.iter() {
@@ -33,19 +34,16 @@ fn main() {
         }
 
         let mut len: u32 = d.len() as u32;
+
+        let exp = (digits.len() as u32 - 1) - i as u32;
+
         len /= 2;
 
-        if sum > len {
-            gamma.push_str("1");
-            epsilon.push_str("0");
-        } else {
-            gamma.push_str("0");
-            epsilon.push_str("1");
+        match sum.cmp(&len) {
+            Ordering::Greater => gamma += 2u32.pow(exp),
+            _ => epsilon += 2u32.pow(exp)
         }
     }
-
-    let gamma = u32::from_str_radix(&gamma, 2).unwrap();
-    let epsilon = u32::from_str_radix(&epsilon, 2).unwrap();
 
     println!("Result (part 1): {}", gamma * epsilon);
 }
