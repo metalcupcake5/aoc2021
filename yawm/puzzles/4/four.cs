@@ -9,8 +9,21 @@ namespace puzzles
     {
         private class Board
         {
-            public int[,] Values { get; } = new int[5, 5];
+            private int[,] Values { get; } = new int[5, 5];
             private bool[,] Marked { get; } = new bool[5, 5];
+            
+            public Board (string[] input, int index, int boardSize)
+            {
+                for (var i = 0; i < boardSize; i++)
+                {
+                    var row = input[index + i];
+                    for (var j = 0; j < row.Length; j += 3)
+                    {
+                        var num = row[j] + row[j + 1].ToString().Trim();
+                        Values[i, j / 3] = int.Parse(num);
+                    }
+                }
+            }
 
             public void Guess(int num)
             {
@@ -29,18 +42,6 @@ namespace puzzles
                             sum += Values[i, j];
 
                 return sum;
-            }
-            
-            public void Print()
-            {
-                for (var i = 0; i < Values.GetLength(0); i++)
-                {
-                    var column = new string[Values.GetLength(1)];
-                    for (var j = 0; j < Marked.GetLength(1); j++)
-                        column[j] = Marked[i, j] ? $"{Values[i, j].ToString(),2}" : " -";
-
-                    Console.WriteLine($"{column[0]}, {column[1]}, {column[2]}, {column[3]}, {column[4]}");
-                }
             }
             
             public bool CheckWin()
@@ -127,25 +128,9 @@ namespace puzzles
             input = input.Where(line => !string.IsNullOrEmpty(line) && !line.Contains(',')).ToArray();
 
             for (var i = 0; i < input.Length; i += 5)
-                _boards.Add(CreateBoard(input, i, 5));
+                _boards.Add(new Board(input, i, 5));
         }
 
-        private static Board CreateBoard(string[] input, int index, int boardSize)
-        {
-            var board = new Board();
-            for (var i = 0; i < boardSize; i++)
-            {
-                var row = input[index + i];
-                for (var j = 0; j < row.Length; j += 3)
-                {
-                    var num = row[j] + row[j + 1].ToString().Trim();
-                    board.Values[i, j / 3] = int.Parse(num);
-                }
-            }
-
-            return board;
-        }
-        
         public static void Start(string path)
         {
             var input = File.ReadAllLines(path.Replace("${day}", "4"));

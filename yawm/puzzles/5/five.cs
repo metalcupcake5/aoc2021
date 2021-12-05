@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 
@@ -34,11 +33,11 @@ namespace puzzles
                 End = end;
             }
 
-            public Vector[] GetOverlapping(bool diagonals)
+            public List<Vector> GetOverlapping(bool diagonals)
             {
                 var overlapping = new List<Vector> { Start, End };
                 if (Start.X == End.X && Start.Y == End.Y) 
-                    return overlapping.ToArray();
+                    return overlapping;
 
                 if (Start.X == End.X)
                 {
@@ -47,7 +46,7 @@ namespace puzzles
                     for (var i = lowest + 1; i < highest; i++)
                     {
                         var vec = new Vector(Start.X, i);
-                        if (!overlapping.Contains(vec)) overlapping.Add(vec);
+                        if (vec != Start && vec != End) overlapping.Add(vec);
                     }
                 }
                 else if (Start.Y == End.Y)
@@ -58,7 +57,7 @@ namespace puzzles
                     for (var i = lowest + 1; i < highest; i++)
                     {
                         var vec = new Vector(i, Start.Y);
-                        if (!overlapping.Contains(vec)) overlapping.Add(vec);
+                        if (vec != Start && vec != End) overlapping.Add(vec);
                     }
                 }
                 else if (diagonals)
@@ -75,7 +74,7 @@ namespace puzzles
                 }
                 else return null;
 
-                return overlapping.ToArray();     
+                return overlapping;     
             }
 
             public static Line Parse(string input)
@@ -88,18 +87,19 @@ namespace puzzles
         private class Grid
         {
             public Dictionary<Vector, int> Vectors { get; } = new ();
+            public int Overlapping { get; set; }
         }
 
         private static void A(string[] input)
         {
             var grid = FillGrid(input, false);
-            Console.WriteLine(grid.Vectors.Where(vectorPair => vectorPair.Value > 1).ToList().Count);
+            Console.WriteLine(grid.Overlapping);
         }
         
         private static void B(string[] input)
         {
             var grid = FillGrid(input, true);
-            Console.WriteLine(grid.Vectors.Where(vectorPair => vectorPair.Value > 1).ToList().Count);
+            Console.WriteLine(grid.Overlapping);
         }
 
         private static Grid FillGrid(string[] input, bool diagonals)
@@ -115,9 +115,10 @@ namespace puzzles
 
                 foreach (var vector in overlapping)
                 {
-                    if (grid.Vectors.ContainsKey(vector))
-                        grid.Vectors[vector]++;
-                    else grid.Vectors.Add(vector, 1);
+                    if (grid.Vectors.TryAdd(vector, 1)) continue;
+                    
+                    grid.Vectors[vector]++;
+                    grid.Overlapping++;
                 }
             }
 
