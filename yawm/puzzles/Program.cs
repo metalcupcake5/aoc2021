@@ -1,6 +1,4 @@
-﻿using puzzles;
-
-namespace puzzles
+﻿namespace puzzles
 {
     class Program
     {
@@ -12,6 +10,7 @@ namespace puzzles
             two.Start(Path);
             three.Start(Path);
             four.Start(Path);
+            five.Start(Path);
         }
     }
 }

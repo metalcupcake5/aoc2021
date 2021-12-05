@@ -80,12 +80,7 @@ namespace puzzles
                     board.Guess(number);
                     if (board.CheckWin())
                     {
-                        var sum = board.Sum(false);
-                        Console.WriteLine("Winner: ");
-                        board.Print();
-                        Console.WriteLine();
-                        Console.WriteLine($"Selected board sum: {sum}");
-                        Console.WriteLine($"End result: {sum * number}");
+                        Console.WriteLine($"{board.Sum(false) * number}");
                         return;
                     }
                 }
@@ -123,13 +118,7 @@ namespace puzzles
             if (lastWinner is null)
                 return;
             
-            Console.WriteLine($"Winner ({winners}): ");
-            lastWinner.Print();
-            Console.WriteLine();
-            
-            var sum = lastWinner.Sum(false);
-            Console.WriteLine($"Selected board sum: {sum}");
-            Console.WriteLine($"End result: {sum * lastNum}");
+            Console.WriteLine($"{lastWinner.Sum(false) * lastNum}");
         }
 
         private static void Init(string[] input)
