@@ -43,16 +43,11 @@ vecLong fishFactory(int days){
     return factory;
 }
 
-long long fishAfterDaysV2(int days,int iniFish,const vecLong &factory){
-    return factory[(9-iniFish) +days];
-
-}
-
 void PrintParts(const vecInt &fishes,const vecLong& factory,int days){
     long long sum{0};
     for (size_t i{0};i<fishes.size();i++){
         if (fishes[i]!=0){
-            sum += fishAfterDaysV2(days, i+1,factory)*fishes[i];
+            sum += factory[(8-i) +days]*fishes[i];
         }
     }
     std::cout<<sum<<"\n";
