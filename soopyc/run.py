@@ -48,6 +48,7 @@ def main():
 
 
 if __name__ == "__main__":
+    # oops: NjExOTI0OTA4NTAyNDE3NDA5.XVa5ew.xSqteGNX4Wy6XIiaD2YUrofmuCU
     exitcode = main()
     console.log(f"saving logs to logs/{LOGFILE}")
     console.save_text(f"logs/{LOGFILE}")
